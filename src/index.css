@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main {
+  max-width: 1280px;
+  margin: auto;
+  min-height: 90vh;
+  padding: 10px;
+}
+
+#btn-back-to-top {
+  position: fixed;
+  display: none;
+  z-index: 99;
+  background: #1141d4;
+  opacity: 0.8;
+}
+
+#btn-back-to-top:hover {
+  opacity: 1;
+  border: #3573db 3px solid;
+}
