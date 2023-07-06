@@ -2,9 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useTitle } from "../hooks/useTitle";
 import Backup from "../assets/images/backup.png";
+import { Spinner } from "../components";
 export const MovieDetail = () => {
   const params = useParams();
   const [movie, setMovie] = useState({});
+  const [loading, setLoading] = useState(true);
+  //eslint-disable-next-line
   const pageTitle = useTitle(movie.title);
   const image = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
@@ -17,10 +20,16 @@ export const MovieDetail = () => {
       );
       const json = await response.json();
       setMovie(json);
-      console.log(json);
+      // console.log(json);
+      // setLoading(false);
+      setLoading(false);
     }
     fetchMovies();
-  }, []);
+  });
+
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <main>
       <section className="flex justify-around flex-wrap py-5">
@@ -74,12 +83,12 @@ export const MovieDetail = () => {
 
           <p className="my-4">
             <span className="mr-2 font-bold">Budget:</span>
-            <span>{movie.budget}</span>
+            <span>${movie.budget ? movie.budget.toLocaleString() : ""}</span>
           </p>
 
           <p className="my-4">
             <span className="mr-2 font-bold">Revenue:</span>
-            <span>{movie.revenue}</span>
+            <span>${movie.revenue ? movie.revenue.toLocaleString() : ""}</span>
           </p>
 
           <p className="my-4">

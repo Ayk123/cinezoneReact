@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 export const BackToTopButton = () => {
-  const [displayButton, setDisplayButton] = useState(false);
-  let mybutton = document.getElementById("btn-back-to-top");
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
-        mybutton.style.display = "block";
+        setIsVisible(true);
       } else {
-        mybutton.style.display = "none";
+        setIsVisible(false);
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -29,7 +28,9 @@ export const BackToTopButton = () => {
       type="button"
       data-mdb-ripple="true"
       data-mdb-ripple-color="light"
-      className="h-16 w-16 p-3 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out bottom-5 right-5"
+      className={`${
+        isVisible ? "inline-block" : "hidden"
+      } h-16 w-16 p-3 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out bottom-5 right-5`}
       id="btn-back-to-top"
       onClick={backToTop}
     >

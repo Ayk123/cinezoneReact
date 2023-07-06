@@ -11,7 +11,7 @@ main {
 
 #btn-back-to-top {
   position: fixed;
-  display: none;
+  /* display: none; */
   z-index: 99;
   background: #1141d4;
   opacity: 0.8;

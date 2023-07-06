@@ -2,11 +2,16 @@ import { useSearchParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import { Card } from "../components";
 import { useTitle } from "../hooks/useTitle";
+import { Spinner } from "../components";
 export const Search = ({ apiPath }) => {
   const [searchParams] = useSearchParams();
   const queryTerm = searchParams.get("q");
-  const { data: movies } = useFetch(apiPath, queryTerm);
+  const { data: movies, loading } = useFetch(apiPath, queryTerm);
+  //eslint-disable-next-line
   const pageTitle = useTitle(`Search result for ${queryTerm}`);
+  if (loading) {
+    return <Spinner />;
+  }
   return (
     <main>
       <section className="py-7">
